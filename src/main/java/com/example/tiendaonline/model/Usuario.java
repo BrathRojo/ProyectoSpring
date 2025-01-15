@@ -27,4 +27,17 @@ public class Usuario {
 	private String direccion;
 	private String telefono;
 	private long carrito;
+	
+	public Usuario(@NotEmpty String nombre, String apellidos, String contraseña, String rol,
+			@Email String email, String dni, String direccion, String telefono, long carrito) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.contraseña = contraseña;
+		this.rol = rol;
+		this.email = email;
+		this.dni = dni;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.carrito = carrito;
+	}
 }

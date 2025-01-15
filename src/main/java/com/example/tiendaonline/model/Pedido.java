@@ -1,5 +1,7 @@
 package com.example.tiendaonline.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -15,5 +17,5 @@ public class Pedido {
 	private String dni;
 	private String direccion;
 	private float precioTotal;
-	private String fecha;
+	private Date fecha;
 }
