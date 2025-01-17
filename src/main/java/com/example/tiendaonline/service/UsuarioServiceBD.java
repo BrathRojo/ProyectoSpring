@@ -35,4 +35,8 @@ public class UsuarioServiceBD implements UsuarioService {
 	public Usuario edit(Usuario u) {
 		return repositorio.save(u);
 	}
+	
+	public List<Usuario> buscador(String cadena) {
+		 return repositorio.findByNombreContainsIgnoreCaseOrEmailContainsIgnoreCaseOrTelefonoContainsIgnoreCase(cadena, cadena, cadena);
+	}
 }
