@@ -13,12 +13,8 @@ public class SecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/webjars/**", "/css/**", "/h2-console/**").permitAll()
+					.requestMatchers("/webjars/**", "/css/**", "/h2-console/**", "/").permitAll()
 					.anyRequest().authenticated()
-			)
-			.formLogin(login -> login
-				.loginPage("/login")
-				.permitAll()
 			);
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
