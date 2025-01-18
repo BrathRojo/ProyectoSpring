@@ -32,6 +32,11 @@ public class ProductoServiceBD implements ProductoService {
 	}
 	
 	@Override
+	public void borraProducto(long id) {
+		repositorio.deleteById(id);
+	}
+	
+	@Override
 	public Producto edit(Producto p) {
 		return repositorio.save(p);
 	}

@@ -30,6 +30,12 @@ public class Producto {
 		this.stock = stock;
 		this.imagen = imagen;
 	}
+	
+	public Producto() {
+
+	}
+
+
 
 	public long getId() {
 		return id;

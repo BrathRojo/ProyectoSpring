@@ -13,9 +13,7 @@ public class Categoria {
 	@Id @GeneratedValue
 	private Long id;
 	private String nombre;
-	
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -55,6 +53,12 @@ public class Categoria {
 	public Categoria(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public Categoria() {
+
+	}
+
+
 
 
 

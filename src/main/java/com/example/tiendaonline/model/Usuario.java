@@ -2,6 +2,8 @@ package com.example.tiendaonline.model;
 
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -31,8 +33,23 @@ public class Usuario {
 	private String telefono;
 	private long carrito;
 	
+	
+	
 	public Usuario(@NotEmpty String nombre, String apellidos, String contraseña, String rol,
 			@Email String email, String dni, String direccion, String telefono, long carrito) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.contraseña = contraseña;
+		this.rol = "USER";
+		this.email = email;
+		this.dni = dni;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.carrito = carrito;
+	}
+
+	public Usuario(@NotEmpty String nombre, String apellidos, String contraseña, String rol, @Email String email,
+			String dni, String direccion, String telefono) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.contraseña = contraseña;
@@ -41,7 +58,6 @@ public class Usuario {
 		this.dni = dni;
 		this.direccion = direccion;
 		this.telefono = telefono;
-		this.carrito = carrito;
 	}
 
 	public Usuario() {
