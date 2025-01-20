@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Inserción</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/zonaAdmin">Admin Tienda</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#categorias">Categorías</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#productos">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#usuarios">Usuarios</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container my-5">
+      <h2 class="text-center mb-4">Formulario de Inserción</h2>
+
+      <!-- Accordion Component -->
+      <div class="accordion" id="formAccordion">
+        <!-- Usuario Form -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingUsuario">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseUsuario"
+              aria-expanded="true"
+              aria-controls="collapseUsuario"
+            >
+              Insertar Nuevo Usuario
+            </button>
+          </h2>
+          <div
+            id="collapseUsuario"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingUsuario"
+            data-bs-parent="#formAccordion"
+          >
+            <div class="accordion-body">
+              <form
+                method="post"
+                th:object="${usuarioForm}"
+                th:action="@{/zonaAdmin/nuevo/usuario/submit}"
+              >
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    placeholder="Nombre"
+                    required
+                    autofocus
+                    th:field="*{nombre}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="apellidos" class="form-label">Apellidos</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="apellidos"
+                    placeholder="Apellidos"
+                    required
+                    th:field="*{apellidos}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label"
+                    >Correo Electrónico</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="nombre@ejemplo.com"
+                    required
+                    th:field="*{email}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="direccion" class="form-label">Dirección</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="direccion"
+                    placeholder="C/ejemplo 123"
+                    required
+                    th:field="*{direccion}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="dni" class="form-label">DNI</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="dni"
+                    placeholder="12345678a"
+                    required
+                    th:field="*{dni}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="tlf" class="form-label">Teléfono</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tlf"
+                    placeholder="987654321"
+                    required
+                    th:field="*{telefono}"
+                  />
+                </div>
+				<div class="mb-3">
+                  <label for="rol" class="form-label">Rol</label>
+                  <select class="form-select" id="rol" th:field="*{rol}">
+                    <option value="USER">Usuario</option>
+                    <option value="ADMIN">Administrador</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="Crea una contraseña"
+                    required
+                    th:field="*{contraseña}"
+                  />
+                </div>
+				<button type="submit" class="btn btn-primary">
+                  Registrar Usuario
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categoria Form -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingCategoria">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseCategoria"
+              aria-expanded="false"
+              aria-controls="collapseCategoria"
+            >
+              Insertar Nueva Categoría
+            </button>
+          </h2>
+          <div
+            id="collapseCategoria"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingCategoria"
+            data-bs-parent="#formAccordion"
+          >
+            <div class="accordion-body">
+				<form
+	                method="post"
+	                th:object="${categoriaForm}"
+	                th:action="@{/zonaAdmin/nuevo/categoria/submit}"
+	            >                
+				  <div class="mb-3">
+                  <label for="nombreCategoria" class="form-label"
+                    >Nombre de la Categoría</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombreCategoria"
+                    name="nombre"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Registrar Categoría
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto Form -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingProducto">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseProducto"
+              aria-expanded="false"
+              aria-controls="collapseProducto"
+            >
+              Insertar Nuevo Producto
+            </button>
+          </h2>
+          <div
+            id="collapseProducto"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingProducto"
+            data-bs-parent="#formAccordion"
+          >
+            <div class="accordion-body">
+				<form
+	                method="post"
+	                th:object="${productoForm}"
+	                th:action="@{/zonaAdmin/nuevo/producto/submit}"
+					enctype="multipart/form-data"
+	            >
+                <div class="mb-3">
+                  <label for="nombreProducto" class="form-label"
+                    >Nombre del Producto</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombreProducto"
+                    name="nombre"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="descripcionProducto" class="form-label"
+                    >Descripción</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="descripcionProducto"
+                    name="descripcion"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="precioProducto" class="form-label">Precio</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="precioProducto"
+                    name="precioUnitario"
+                    step="0.01"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="cantidadProducto" class="form-label">Stock</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="cantidadProducto"
+                    name="stock"
+                    step="1"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="categoriaProducto" class="form-label">Categorías</label>
+                  <div th:each="categoria : ${listaCategorias}">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" th:id="${'categoria_' + categoria.id}" th:name="categorias" th:value="${categoria.id}">
+                      <label class="form-check-label" th:for="${'categoria_' + categoria.id}" th:text="${categoria.nombre}"></label>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Registrar Producto
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

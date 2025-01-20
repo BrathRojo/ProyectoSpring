@@ -9,4 +9,5 @@ public interface CategoriaService {
 	public List<Categoria> findAll();
 	public Categoria findById(long id);
 	public Categoria edit(Categoria c);
+	public void borraCategoria(long id);
 }

@@ -20,6 +20,7 @@ public class Pedido {
 	private String direccion;
 	private float precioTotal;
 	private Date fecha;
+	private Boolean pedidoActivo;
 	
 	public Pedido(String nombre, String apellidos, String dni, String direccion, float precioTotal, Date fecha) {
 		this.nombre = nombre;
@@ -28,7 +29,9 @@ public class Pedido {
 		this.direccion = direccion;
 		this.precioTotal = precioTotal;
 		this.fecha = fecha;
+		this.pedidoActivo = true;
 	}
+	
 	public long getId() {
 		return id;
 	}
@@ -72,6 +75,25 @@ public class Pedido {
 		this.fecha = fecha;
 	}
 	
+	public Boolean getPedidoActivo() {
+		return pedidoActivo;
+	}
+	public void setPedidoActivo(Boolean pedidoActivo) {
+		this.pedidoActivo = pedidoActivo;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public List<LineaPedido> getLineapedidos() {
+		return lineapedidos;
+	}
+	public void setLineapedidos(List<LineaPedido> lineapedidos) {
+		this.lineapedidos = lineapedidos;
+	}
+
 	@ManyToOne
 	private Usuario usuario;
 	

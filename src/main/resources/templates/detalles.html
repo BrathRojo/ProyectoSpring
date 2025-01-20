@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Tienda de Música</title>
-    <!-- Bootstrap CSS -->
+    <title>Detalles del Producto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -26,34 +25,34 @@
 	        </div>
 	    </header>
 
-    <section class="py-5">
-        <div class="container">
-            <h1 class="text-center mb-4">Iniciar Sesión</h1>
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-					<form class="form-signin" th:action="@{/login/submit}" method="post">
-                        <div class="mb-3">
-                            <label for="usuario" class="form-label">Usuario</label>
-                            <input type="text" class="form-control" id="usuario" name="username" placeholder="Usuario" required autofocus>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa tu contraseña" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
-                    </form>
-                    <p class="text-center mt-3">
-                        ¿No tienes una cuenta? <a href="/usuario/new">Regístrate aquí</a>
-                    </p>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Imagen del producto -->
+				<img th:src="@{${producto.imagen}}" class="img-fluid" alt="Imagen del producto">
+            </div>
+            <div class="col-md-6">
+                <h2 th:text="${producto.nombre}"></h2>
+                <p class="lead" th:text="'€ ' + ${producto.precioUnitario}"></p>
+                <p th:text="${producto.descripcion}"></p>
+                
+                <div>
+                    <h5>Categorías</h5>
+                    <ul>
+                        <li th:each="categoria : ${producto.categorias}" th:text="${categoria.nombre}"></li>
+                    </ul>
                 </div>
-				<div th:if="${error}" class="alert alert-danger text-center">
-					<p th:text="${error}"></p>
-				</div>
+				
+				<p>Cantidad en stock:</p>
+				<p th:text="${producto.stock}"></p>
+                
+				<form method="post" th:action="@{/carrito/{id}(id=${producto.id})}">					
+					<input type="submit" class="btn btn-primary" value="Añadir al Carrito"></input>
+				</form>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

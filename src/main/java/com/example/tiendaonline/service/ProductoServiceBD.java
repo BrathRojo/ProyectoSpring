@@ -40,4 +40,9 @@ public class ProductoServiceBD implements ProductoService {
 	public Producto edit(Producto p) {
 		return repositorio.save(p);
 	}
+
+	@Override
+	public List<Producto> findTop4ByOrderByVentasDesc() {
+		return repositorio.findTop4ByOrderByVentasDesc();
+	}
 }

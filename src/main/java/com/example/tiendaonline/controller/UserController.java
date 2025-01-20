@@ -13,31 +13,37 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.tiendaonline.model.Producto;
 import com.example.tiendaonline.model.Usuario;
-import com.example.tiendaonline.repository.UsuarioRepository;
+import com.example.tiendaonline.service.ProductoServiceBD;
 import com.example.tiendaonline.service.UsuarioServiceBD;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
 	
-	private String uploadDir = "src/imagenes";
-	
 	@Autowired
 	private UsuarioServiceBD servicio;
 	
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private ProductoServiceBD productos;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@GetMapping({"/", "/index"})
-	public String listado(Model model, @RequestParam(name="q", required=false) String query) {
-		List<Usuario> resultado = (query == null) ? servicio.findAll() : servicio.buscador(query);
-		model.addAttribute("listaUsuarios", resultado);
-		return "index";
+	public String listado(Model model, HttpSession session) {
+	    Usuario usuarioLogueado = (Usuario) session.getAttribute("usuarioLogueado");
+	    List<Producto> productosDestacados = productos.findTop4ByOrderByVentasDesc();
+	    model.addAttribute("productos", productos.findAll());
+	    model.addAttribute("productosDestacados", productosDestacados);
+
+	    if (usuarioLogueado != null) {
+	        model.addAttribute("usuarioLogueado", usuarioLogueado);
+	    }
+	    return "index";
 	}
 	
 	@GetMapping("/usuario/new")
@@ -52,7 +58,6 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			return "registro";
 		} else {
-			nuevoUsuario.setContraseña(passwordEncoder.encode(nuevoUsuario.getContraseña()));
 			servicio.add(nuevoUsuario);
 			return "redirect:/login";
 		}
@@ -60,29 +65,32 @@ public class UserController {
 	
 	@GetMapping("/login")
 	public String login(Model model) {
-		
 		return "login";
 	}
 	
 	@PostMapping("/login/submit")
-	public String iniciarSesion(@RequestParam String nombre, @RequestParam String contraseña, Model model) {
-	    Usuario usuario = new Usuario();
-	    System.out.println(usuario);
+	public String iniciarSesion(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
+	    Usuario user = servicio.findByEmail(username);
 
-	    if (usuario != null) {
-	        // Comprobación de la contraseña codificada
-	        if (passwordEncoder.matches(contraseña, usuario.getContraseña())) {
-	            return "redirect:/index"; // Redirige al índice si la autenticación es exitosa
+	    if (user != null) {
+	        if (passwordEncoder.matches(password, user.getContraseña())) {
+	        	session.setAttribute("usuarioLogueado", user);
+	            return "redirect:/index";
 	        } else {
-	            // Si la contraseña no es correcta
 	            model.addAttribute("error", "Nombre de usuario o contraseña incorrectos.");
-	            return "login"; // Muestra la vista de login con un mensaje de error
+	            return "login";
 	        }
-	    } else {
-	        // Si no se encuentra el usuario
-	        model.addAttribute("error", "Nombre de usuario o contraseña incorrectos.");
-	        return "login"; // Muestra la vista de login con un mensaje de error
 	    }
+	    else {
+            model.addAttribute("error", "Nombre de usuario o contraseña incorrectos.");
+	    	return "login";
+	    }
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+	    session.invalidate();
+	    return "redirect:/login?logout";
 	}
 	
 	@GetMapping("/zonaAdmin")

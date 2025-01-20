@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Inserción</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/zonaAdmin">Admin Tienda</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#categorias">Categorías</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#productos">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#usuarios">Usuarios</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container my-5">
+      <h2 class="text-center mb-4">Editar Categoría</h2>
+	  <div class="accordion" id="formAccordion">
+
+        <div class="accordion-item">
+          
+          <div
+            id="collapseCategoria"
+            aria-labelledby="headingCategoria"
+            data-bs-parent="#formAccordion"
+          >
+            <div class="accordion-body">
+				<form
+	                method="post"
+	                th:object="${categoriaAEditar}"
+	                th:action="@{/zonaAdmin/editar/categoria/submit}"
+	            >           
+				<input type="hidden" th:field="*{id}" />     
+				  <div class="mb-3">
+                  <label for="nombreCategoria" class="form-label"
+                    >Nombre de la Categoría</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombreCategoria"
+                    name="nombre"
+					th:field="*{nombre}"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Editar Categoría
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

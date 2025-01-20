@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Inserción</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/zonaAdmin">Admin Tienda</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#categorias">Categorías</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#productos">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#usuarios">Usuarios</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container my-5">
+      <h2 class="text-center mb-4">Editar Usuario</h2>
+	  <div class="accordion" id="formAccordion">
+
+        <!-- Usuario Form -->
+        <div class="accordion-item">
+          <div
+            id="collapseUsuario"
+            aria-labelledby="headingUsuario"
+            data-bs-parent="#formAccordion"
+          >
+            <div class="accordion-body">
+              <form
+                method="post"
+                th:object="${usuarioAEditar}"
+                th:action="@{/zonaAdmin/editar/usuario/submit}"
+              >
+			  <input type="hidden" th:field="*{id}" />
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    placeholder="Nombre"
+                    required
+                    autofocus
+                    th:field="*{nombre}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="apellidos" class="form-label">Apellidos</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="apellidos"
+                    placeholder="Apellidos"
+                    
+                    th:field="*{apellidos}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label"
+                    >Correo Electrónico</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="nombre@ejemplo.com"
+                    required
+                    th:field="*{email}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="direccion" class="form-label">Dirección</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="direccion"
+                    placeholder="C/ejemplo 123"
+                    
+                    th:field="*{direccion}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="dni" class="form-label">DNI</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="dni"
+                    placeholder="12345678a"
+                    required
+                    th:field="*{dni}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="tlf" class="form-label">Teléfono</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tlf"
+                    placeholder="987654321"
+                    
+                    th:field="*{telefono}"
+                  />
+                </div>
+				<div class="mb-3">
+                  <label for="rol" class="form-label">Rol</label>
+                  <select class="form-select" id="rol" th:field="*{rol}">
+                    <option value="USER">Usuario</option>
+                    <option value="ADMIN">Administrador</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="Contraseña"
+                    required
+                    th:field="*{contraseña}"
+                  />
+                </div>
+				<button type="submit" class="btn btn-primary">
+                  Editar Usuario
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+	  </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

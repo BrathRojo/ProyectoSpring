@@ -10,4 +10,5 @@ public interface ProductoService {
 	public Producto findById(long id);
 	public Producto edit(Producto u);
 	public void borraProducto(long id);
+	public List<Producto> findTop4ByOrderByVentasDesc();
 }

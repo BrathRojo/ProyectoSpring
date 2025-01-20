@@ -9,4 +9,6 @@ public interface UsuarioService {
 	public List<Usuario> findAll();
 	public Usuario findById(long id);
 	public Usuario edit(Usuario u);
+	public void borraUsuario(long id);
+	Usuario findByEmail(String email);
 }

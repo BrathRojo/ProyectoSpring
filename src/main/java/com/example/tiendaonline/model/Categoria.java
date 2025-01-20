@@ -2,6 +2,7 @@ package com.example.tiendaonline.model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -12,6 +13,8 @@ public class Categoria {
 
 	@Id @GeneratedValue
 	private Long id;
+	
+	@Column(unique = true)
 	private String nombre;
 
 	public Long getId() {
@@ -48,19 +51,18 @@ public class Categoria {
 		this.productos = productos;
 	}
 
-
-
 	public Categoria(String nombre) {
 		this.nombre = nombre;
 	}
 	
+	public Categoria(String nombre, List<Producto> productos) {
+		this.nombre = nombre;
+		this.productos = productos;
+	}
+
 	public Categoria() {
 
 	}
-
-
-
-
 
 	@ManyToMany(mappedBy = "categorias")
 	private List<Producto> productos;

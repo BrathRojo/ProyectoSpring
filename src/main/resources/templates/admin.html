@@ -10,7 +10,6 @@
     
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
@@ -20,56 +19,52 @@
             top: 0;
             z-index: 100;
         }
-        .container {
-            margin-top: 50px;
+		.container {
+			font-family: Arial, sans-serif;
+            margin-top: 20px;
         }
         .card {
-            margin: 20px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            margin: 5px;
         }
         .btn-custom {
             width: 200px;
             margin: 10px;
+        }
+        .buttons-container {
+            text-align: center;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
 
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/admin">Admin Dashboard</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/productos">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/categorias">Categorías</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/usuarios">Usuarios</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+	        <div class="container-fluid">
+	            <a class="navbar-brand" href="/">Admin Tienda</a>
+	            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	                <span class="navbar-toggler-icon"></span>
+	            </button>
+	        </div>
+	</nav>
 
     <!-- Contenedor principal -->
     <div class="container">
         <h1 class="text-center mb-4">Zona de Administración</h1>
-        <p class="text-center mb-5">Seleccione una opción para gestionar productos, categorías o usuarios:</p>
+        <p class="text-center mb-5">Seleccione una opción para gestionar datos:</p>
 
-        <div class="row justify-content-center">
+        <div class="buttons-container">
+            <!-- Botón para Añadir -->
+            <a href="zonaAdmin/nuevo" class="btn btn-primary btn-custom">Añadir</a>
+            <!-- Botón para Editar -->
+            <a href="zonaAdmin/editar" class="btn btn-warning btn-custom">Editar</a>
+        </div>
+    </div>
 
-            <!-- Botones para Productos -->
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Productos</h4>
-                        <a href="/admin/productos/new" class="btn btn-primary btn-custom">Añadir Producto</a>
-                        <a href="/admin/productos/edit" class="btn btn-warning btn-custom">Editar Producto</a>
-                    </div>
-  
+    <!-- Enlace a Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
