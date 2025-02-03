@@ -45,4 +45,12 @@ public class ProductoServiceBD implements ProductoService {
 	public List<Producto> findTop4ByOrderByVentasDesc() {
 		return repositorio.findTop4ByOrderByVentasDesc();
 	}
+
+	public List<Producto> findByNombreContaining(String query) {
+        return repositorio.findByNombreContaining(query);
+    }
+
+    public List<Producto> findByNombreContainingAndCategoriasId(String query, Long categoriaId) {
+        return repositorio.findByNombreContainingAndCategoriasId(query, categoriaId);
+    }
 }

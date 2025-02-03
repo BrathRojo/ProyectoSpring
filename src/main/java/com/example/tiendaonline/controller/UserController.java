@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.tiendaonline.model.Producto;
 import com.example.tiendaonline.model.Usuario;
+import com.example.tiendaonline.service.CategoriaServiceBD;
 import com.example.tiendaonline.service.ProductoServiceBD;
 import com.example.tiendaonline.service.UsuarioServiceBD;
 
@@ -29,6 +30,9 @@ public class UserController {
 	
 	@Autowired
 	private ProductoServiceBD productos;
+
+	@Autowired
+	private CategoriaServiceBD categorias;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -39,6 +43,7 @@ public class UserController {
 	    List<Producto> productosDestacados = productos.findTop4ByOrderByVentasDesc();
 	    model.addAttribute("productos", productos.findAll());
 	    model.addAttribute("productosDestacados", productosDestacados);
+		model.addAttribute("listaCategorias", categorias.findAll());
 
 	    if (usuarioLogueado != null) {
 	        model.addAttribute("usuarioLogueado", usuarioLogueado);
@@ -64,7 +69,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String login(Model model, HttpSession session) {
+	    Usuario usuarioLogueado = (Usuario) session.getAttribute("usuarioLogueado");
+
+	    if (usuarioLogueado != null) {
+	        model.addAttribute("usuarioLogueado", usuarioLogueado);
+	    }
 		return "login";
 	}
 	

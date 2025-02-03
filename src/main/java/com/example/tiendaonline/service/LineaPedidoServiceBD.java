@@ -35,4 +35,8 @@ public class LineaPedidoServiceBD implements LineaPedidoService {
 	public LineaPedido edit(LineaPedido lp) {
 		return repositorio.save(lp);
 	}
+
+	public void delete(LineaPedido lineaPedidoAEliminar) {
+		repositorio.delete(lineaPedidoAEliminar);
+	}
 }

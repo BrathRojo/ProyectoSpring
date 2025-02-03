@@ -1,9 +1,12 @@
 package com.example.tiendaonline.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -22,14 +25,20 @@ public class Pedido {
 	private Date fecha;
 	private Boolean pedidoActivo;
 	
-	public Pedido(String nombre, String apellidos, String dni, String direccion, float precioTotal, Date fecha) {
+	public Pedido(String nombre, String apellidos, String dni, String direccion, Usuario usuario) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.dni = dni;
 		this.direccion = direccion;
-		this.precioTotal = precioTotal;
-		this.fecha = fecha;
+		this.precioTotal = 0;
+		this.fecha = new Date();
 		this.pedidoActivo = true;
+		this.lineapedidos = new ArrayList<LineaPedido>();
+		this.usuario = usuario;
+	}
+	
+	public Pedido() {
+		
 	}
 	
 	public long getId() {
@@ -93,12 +102,17 @@ public class Pedido {
 	public void setLineapedidos(List<LineaPedido> lineapedidos) {
 		this.lineapedidos = lineapedidos;
 	}
+	
+	public void setLineapedidos(LineaPedido lineaPedido) {
+		this.lineapedidos.add(lineaPedido);
+	}
 
 	@ManyToOne
 	private Usuario usuario;
 	
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<LineaPedido> lineapedidos;
+
 	
 	
 }

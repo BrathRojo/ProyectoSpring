@@ -12,7 +12,6 @@
 	        <div class="container d-flex justify-content-between align-items-center">
 	            <a href="/" class="logo fs-3">Tienda de Música</a>
 	            <nav class="d-flex align-items-center gap-3">
-	                <input type="text" class="form-control" placeholder="Buscar productos..." style="width: 200px;">
 					<div th:if="${usuarioLogueado}">
 						<p>Bienvenido</p>
 						<div th:text="${usuarioLogueado.nombre}"></div>					

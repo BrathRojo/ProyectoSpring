@@ -9,4 +9,5 @@ public interface LineaPedidoService {
 	public List<LineaPedido> findAll();
 	public LineaPedido findById(long id);
 	public LineaPedido edit(LineaPedido u);
+	public void delete(LineaPedido lineaPedidoAEliminar);
 }
